@@ -1,0 +1,1 @@
+export { analyticsConfig } from './analyticsConfig'
