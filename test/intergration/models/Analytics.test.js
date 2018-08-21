@@ -2,9 +2,8 @@
 /* global describe, it */
 const assert = require('assert')
 
-describe('Test Analytics', () => {
+describe('Analytic Model', () => {
   it('should exist', () => {
-    assert(global.app.api.analytics)
-    assert(global.app.analytics)
+    assert(global.app.api.models['Analytic'])
   })
 })

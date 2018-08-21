@@ -26,10 +26,64 @@ const App = {
         require('../../dist').AnalyticsSpool // spool-proxy-analytics
       ]
     },
-    analytics: {},
+    analytics: {
+      prefix: '/api/v1',
+      profile: 'testProfile',
+      config: {
+        profiles: {
+          testProfile: [
+            'TestAnalytic.test',
+            'TestAnalytic.minuteTest',
+            'TestAnalytic.hourTest',
+            'TestAnalytic.dayTest',
+            'TestAnalytic.weekTest',
+            'TestAnalytic.monthTest',
+            'TestAnalytic.quarterTest',
+            'TestAnalytic.yearTest'
+          ]
+        },
+        frequency: {
+          minute: [
+            'TestAnalytic.minuteTest'
+          ],
+          hour: [
+            'TestAnalytic.hourTest'
+          ],
+          day: [
+            'TestAnalytic.dayTest'
+          ],
+          week: [
+            'TestAnalytic.weekTest'
+          ],
+          month: [
+            'TestAnalytic.monthTest'
+          ],
+          quarter: [
+            'TestAnalytic.quarterTest'
+          ],
+          year: [
+            'TestAnalytic.yearTest'
+          ]
+        }
+      }
+    },
     engine: {
+      prefix: '/api/v1',
       live_mode: false,
-      profile: 'test'
+      profile: 'testProfile',
+      crons_config: {
+        profiles: {
+          testProfile: [
+            'AnalyticsCron.minute',
+            'AnalyticsCron.hour',
+            'AnalyticsCron.day',
+            'AnalyticsCron.week',
+            'AnalyticsCron.month',
+            'AnalyticsCron.quarter',
+            'AnalyticsCron.year'
+          ]
+        }
+      }
     },
     web: {
       express: require('express'),
@@ -63,7 +117,9 @@ const App = {
       migrate: 'drop'
     },
     policies: {
-      // '*': [ 'CheckPermissions.checkRoute' ]
+      // '*': {
+      //   '*': [ 'CheckPermissions.checkRoute' ]
+      // }
     },
     session: {
       secret: 'analytics'

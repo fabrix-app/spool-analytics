@@ -13,6 +13,9 @@ export class AnalyticsService extends Service {
       if (!this.app.analytics.hasOwnProperty(analytic)) {
         continue
       }
+      if (!this.app.analytics[analytic].hasOwnProperty('build')) {
+        continue
+      }
       analytics.push(this.app.analytics[analytic])
     }
     return Promise.all(analytics.map(analytic => {

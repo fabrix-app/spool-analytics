@@ -1,1 +1,1 @@
-export {}
+export { Analytic } from './Analytic'

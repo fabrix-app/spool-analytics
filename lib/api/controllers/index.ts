@@ -1,1 +1,1 @@
-export {}
+export { AnalyticsController } from './AnalyticsController'

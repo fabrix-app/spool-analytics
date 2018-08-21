@@ -1,4 +1,5 @@
-const _ = require('lodash')
+import { difference } from 'lodash'
+
 export class Analytic {
   constructor (app) {
     Object.defineProperties(this, {
@@ -37,15 +38,36 @@ export class Analytic {
       build: {
         enumerable: false,
         value: function() {
-          const unhallowedMethods = ['build']
-          const allowedMethods = _.difference(this.methods, unhallowedMethods)
+          const unhallowedMethods = ['publish', 'build']
+          const allowedMethods = difference(this.methods, unhallowedMethods)
           return Promise.all(allowedMethods.map(method => {
             return this[method]()
           }))
         },
         writable: true
+      },
+      publish: {
+        enumerable: false,
+        value: function(results, options = {}) {
+          return app.models.Analytics.bulkCreate(results, options)
+        },
+        writable: true
       }
     })
+  }
+
+  /**
+   * Return the id of this analytic
+   */
+  get id () {
+    return this.constructor.name.replace(/(\w+)Analytic/, '$1').toLowerCase()
+  }
+
+  /**
+   * Gets the name of the analytic class
+   */
+  get name() {
+    return this.constructor.name
   }
 
 }

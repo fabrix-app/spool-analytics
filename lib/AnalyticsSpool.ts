@@ -1,12 +1,21 @@
 import { Spool } from '@fabrix/fabrix/dist/common'
 import { Validator } from './validator'
-import { Analytics } from './analytics'
+import { Utils } from './utils'
 
 import * as config from './config/index'
 import * as pkg from '../package.json'
 import * as api from './api/index'
 
 export class AnalyticsSpool extends Spool {
+  public analytics = {
+    minute: new Set(),
+    hour: new Set(),
+    day: new Set(),
+    week: new Set(),
+    month: new Set(),
+    quarter: new Set(),
+    year: new Set(),
+  }
 
   constructor(app) {
     super(app, {
@@ -35,6 +44,10 @@ export class AnalyticsSpool extends Spool {
       return Promise.reject(new Error('No configuration found at config.analytics!'))
     }
 
+    if (!this.app.crons['AnalyticsCron']) {
+      return Promise.reject(new Error('AnalyticsCron is not available!'))
+    }
+
     return Promise.all([
       Validator.validateAnalyticsConfig(this.app.config.get('analytics'))
     ])
@@ -47,7 +60,8 @@ export class AnalyticsSpool extends Spool {
   async configure () {
 
     return Promise.all([
-      Analytics.copyDefaults(this.app)
+      Utils.copyDefaults(this.app),
+      Utils.loadAnalytics(this.app)
     ])
   }
 
@@ -55,7 +69,8 @@ export class AnalyticsSpool extends Spool {
    * TODO document method
    */
   async initialize () {
-
+    Utils.addAnalyticsToCron(this.app)
+    return Promise.resolve()
   }
 }
 

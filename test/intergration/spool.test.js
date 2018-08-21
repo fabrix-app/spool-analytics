@@ -17,6 +17,12 @@ describe('Spool', () => {
     it.skip('TODO test')
   })
   describe('#initialize', () => {
-    it.skip('TODO test')
+    it('Should have scheduled the jobs through the AnalyticsCron', () => {
+
+      Object.entries(global.app.scheduler.scheduledJobs).forEach(([_name, job]) => {
+        // console.log('BROKE', _name, job)
+        console.log('NEXT RUN', _name, job.nextInvocation())
+      })
+    })
   })
 })
