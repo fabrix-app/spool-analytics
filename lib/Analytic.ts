@@ -1,6 +1,11 @@
+import { FabrixApp } from '@fabrix/fabrix'
 import { difference } from 'lodash'
 
 export class Analytic {
+  app: FabrixApp
+  publish
+  build
+
   constructor (app) {
     Object.defineProperties(this, {
       app: {

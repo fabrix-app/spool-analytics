@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 const Analytic = require('../../dist').Analytic
 
 module.exports = class TestAnalytic extends Analytic {
