@@ -28,23 +28,34 @@ export class Analytic extends Model {
 
   static schema (app, Sequelize) {
     const schema = {
+      // The time of the analytic start point
       start: {
         type: Sequelize.DATE
       },
+      // The time of the analytic end point
       end: {
         type: Sequelize.DATE
       },
+      // The name of the analytic for searching and grouping
       name: {
         type: Sequelize.STRING
       },
+      // If data is an array of arrays, the label in which they are grouped by
+      group_label: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      // The labels for the analytic
       labels: {
         type: Sequelize.JSONB,
         defaultValue: []
       },
+      // An array of the data for the analytics (can be an array of arrays)
       data: {
         type: Sequelize.JSONB,
         defaultValue: []
       },
+      // Live Mode
       live_mode: {
         type: Sequelize.BOOLEAN,
         defaultValue: app.config.get('engine.live_mode')
