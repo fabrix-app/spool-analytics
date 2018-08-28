@@ -54,7 +54,7 @@ export class Analytic {
       publish: {
         enumerable: false,
         value: function(results, options = {}) {
-          return app.models.Analytics.bulkCreate(results, options)
+          return app.models.Analytic.bulkCreate(results, options)
         },
         writable: true
       }
