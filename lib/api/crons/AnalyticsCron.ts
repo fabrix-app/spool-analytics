@@ -21,7 +21,10 @@ export class AnalyticsCron extends Cron {
       addAnalytic: {
         enumerable: false,
         value: (time, analyticName, analytic) => {
-          return this._analytics[time].set(analyticName, analytic)
+          if (this._analytics[time]) {
+            return this._analytics[time].set(analyticName, analytic)
+          }
+          return null
         },
         writable: true
       },
@@ -31,7 +34,10 @@ export class AnalyticsCron extends Cron {
       removeAnalytic: {
         enumerable: false,
         value: (time, analytic) => {
-          return this._analytics[time].delete(analytic.name, analytic)
+          if (this._analytics[time]) {
+            return this._analytics[time].delete(analytic.name, analytic)
+          }
+          return null
         },
         writable: true
       }
