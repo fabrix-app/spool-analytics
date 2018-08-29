@@ -1,6 +1,6 @@
 {
   "name": "@fabrix/spool-analytics",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Spool: Analytics for Fabrix",
   "homepage": "https://fabrix.app",
   "author": {
@@ -47,7 +47,7 @@
   "devDependencies": {
     "@fabrix/fabrix": "^1.1.4",
     "@fabrix/lint": "^1.0.0-alpha.3",
-    "@fabrix/spool-engine": "^1.1.4",
+    "@fabrix/spool-engine": "^1.1.6",
     "@fabrix/spool-express": "^1.1.5",
     "@fabrix/spool-i18n": "^1.1.0",
     "@fabrix/spool-passport": "^1.1.6",
@@ -69,6 +69,7 @@
   },
   "peerDependencies": {
     "@fabrix/fabrix": "^1.1.4",
+    "@fabrix/spool-engine": "^1.1.6",
     "@fabrix/spool-i18n": "^1.1.0",
     "@fabrix/spool-router": "^1.1.4",
     "@fabrix/spool-sequelize": "^1.1.11"

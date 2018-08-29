@@ -14,6 +14,12 @@ export class AnalyticsCron extends Cron {
 
   constructor(app: FabrixApp) {
     super(app)
+
+    super.unallowedMethods = [
+      'addAnalytic',
+      'removeAnalytic'
+    ]
+
     Object.defineProperties(this, {
       /**
        * Add Analytic
