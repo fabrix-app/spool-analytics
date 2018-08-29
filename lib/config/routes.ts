@@ -34,18 +34,39 @@ export const routes = {
       }
     }
   },
-  '/analytic/:id': {
+  '/analytic/:name': {
     'GET': 'AnalyticsController.findOne',
     config: {
       prefix: 'analytics.prefix',
       validate: {
         params: {
-          id: joi.string().required()
+          name: joi.string().required()
         }
       },
       app: {
         permissions: {
-          resource_name: 'apiGetAnalyticIdRoute',
+          resource_name: 'apiGetAnalyticNameRoute',
+          roles: ['admin']
+        }
+      }
+    }
+  },
+  '/analytic/:name/group': {
+    'GET': 'AnalyticsController.findGroup',
+    config: {
+      prefix: 'analytics.prefix',
+      validate: {
+        params: {
+          name: joi.string().required()
+        },
+        query: {
+          start: joi.number(),
+          end: joi.number()
+        }
+      },
+      app: {
+        permissions: {
+          resource_name: 'apiGetAnalyticNameRoute',
           roles: ['admin']
         }
       }
