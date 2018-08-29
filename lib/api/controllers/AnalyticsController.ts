@@ -1,17 +1,57 @@
 import { FabrixController as Controller } from '@fabrix/fabrix/dist/common'
-
+import * as moment from 'moment'
 /**
  * @module AnalyticsController
  * @description Fabrix Controller.
  */
 export class AnalyticsController extends Controller {
   create(req, res) {
-    //
+    // TODO
     res.json({})
   }
+
   findOne(req, res) {
-    //
-    res.json({})
+    const Analytics = this.app.models['Analytic']
+    const name = req.params.name
+
+    Analytics.findOne({
+      where: {
+        name: name
+      }
+    })
+      .then(analytic => {
+        return res.json(analytic)
+      })
+      .catch(err => {
+        return res.serverError(err)
+      })
+  }
+
+  // TODO
+  findGroup(req, res) {
+    const Analytics = this.app.models['Analytic']
+    const start = moment(req.query.start)
+    const end = moment(req.query.end || Date.now())
+    const name = req.params.name
+
+    Analytics.findAll({
+      where: {
+        name: name,
+        start: {
+          $gte: start.format('YYYY-MM-DD HH:mm:ss')
+        },
+        end: {
+          $gte: end.format('YYYY-MM-DD HH:mm:ss')
+        }
+      }
+    })
+      .then(analytic => {
+        return res.json(analytic)
+      })
+      .catch(err => {
+        return res.serverError(err)
+      })
+
   }
   findAll(req, res) {
     const Analytics = this.app.models['Analytic']

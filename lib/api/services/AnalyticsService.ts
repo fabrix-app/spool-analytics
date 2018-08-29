@@ -26,5 +26,14 @@ export class AnalyticsService extends Service {
         return
       })
   }
+
+  findOne(params) {
+
+  }
+
+  findGroup(params) {
+
+  }
+
 }
 
