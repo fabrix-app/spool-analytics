@@ -66,7 +66,7 @@ export const routes = {
       },
       app: {
         permissions: {
-          resource_name: 'apiGetAnalyticNameRoute',
+          resource_name: 'apiGetAnalyticNameGroupRoute',
           roles: ['admin']
         }
       }
