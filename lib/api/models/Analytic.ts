@@ -94,5 +94,11 @@ Analytic.prototype.toJSON = function() {
   if (this.trend) {
     resp.trend = this.trend
   }
+  if (this.trend_range) {
+    resp.trend_range = this.trend_range
+  }
+  if (this.trend_date_range) {
+    resp.trend_date_range = this.trend_date_range
+  }
   return resp
 }

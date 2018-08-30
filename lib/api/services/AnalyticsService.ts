@@ -57,13 +57,21 @@ export class AnalyticsService extends Service {
 
         if (!analytics[0].group_label) {
           const trend = this.trendGroup(analytics[0].data, analytics[1].data)
-          Object.assign(analytics[0], {trend: trend})
+          Object.assign(analytics[0], {
+            trend: trend,
+            trend_range: 2,
+            trend_date_range: [analytics[0].end, analytics[1].start],
+          })
         }
         else {
           const trend = analytics[0].data.map((d, i) => {
             return this.trendGroup(analytics[0].data[i], analytics[1].data[i])
           })
-          Object.assign(analytics[0], {trend: trend})
+          Object.assign(analytics[0], {
+            trend: trend,
+            trend_range: 2,
+            trend_date_range: [analytics[0].end, analytics[1].start],
+          })
         }
         return analytics[0]
       })
