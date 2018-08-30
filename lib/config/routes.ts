@@ -51,6 +51,23 @@ export const routes = {
       }
     }
   },
+  '/analytic/:name/compare': {
+    'GET': 'AnalyticsController.findCompare',
+    config: {
+      prefix: 'analytics.prefix',
+      validate: {
+        params: {
+          name: joi.string().required()
+        }
+      },
+      app: {
+        permissions: {
+          resource_name: 'apiGetAnalyticNameCompareRoute',
+          roles: ['admin']
+        }
+      }
+    }
+  },
   '/analytic/:name/group': {
     'GET': 'AnalyticsController.findGroup',
     config: {

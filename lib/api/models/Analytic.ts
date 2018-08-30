@@ -55,6 +55,11 @@ export class Analytic extends Model {
         type: Sequelize.JSONB,
         defaultValue: []
       },
+      // A virtual field for doing compare
+      // trend: {
+      //   type: Sequelize.VIRTUAL(Sequelize.JSONB, ['data']),
+      //   defaultValue: []
+      // },
       // Live Mode
       live_mode: {
         type: Sequelize.BOOLEAN,
@@ -71,4 +76,29 @@ export class Analytic extends Model {
   public static associate (models) {
 
   }
+}
+
+
+export interface Analytic {
+  toJSON(): any
+}
+
+/**
+ *
+ */
+Analytic.prototype.toJSON = function() {
+  // Make JSON
+  const resp = this instanceof this.app.models['Analytic'].instance ? this.get({ plain: true }) : this
+
+  // Add Trend information if available
+  if (this.trend) {
+    resp.trend = this.trend
+  }
+  if (this.trend_range) {
+    resp.trend_range = this.trend_range
+  }
+  if (this.trend_date_range) {
+    resp.trend_date_range = this.trend_date_range
+  }
+  return resp
 }
