@@ -27,32 +27,27 @@ export class AnalyticsController extends Controller {
       })
   }
 
-  // TODO
-  findGroup(req, res) {
-    const Analytics = this.app.models['Analytic']
-    const start = moment(req.query.start)
-    const end = moment(req.query.end || Date.now())
-    const name = req.params.name
-
-    Analytics.findAll({
-      where: {
-        name: name,
-        start: {
-          $gte: start.format('YYYY-MM-DD HH:mm:ss')
-        },
-        end: {
-          $gte: end.format('YYYY-MM-DD HH:mm:ss')
-        }
-      }
-    })
+  findCompare(req, res) {
+    this.app.services.AnalyticsService.findCompare(req.params)
       .then(analytic => {
         return res.json(analytic)
       })
       .catch(err => {
         return res.serverError(err)
       })
+  }
+
+  findGroup(req, res) {
+    this.app.services.AnalyticsService.findGroup(req.params, req.query)
+      .then(analytics => {
+        return res.json(analytics)
+      })
+      .catch(err => {
+        return res.serverError(err)
+      })
 
   }
+
   findAll(req, res) {
     const Analytics = this.app.models['Analytic']
     const limit = Math.max(0, req.query.limit || 10)
