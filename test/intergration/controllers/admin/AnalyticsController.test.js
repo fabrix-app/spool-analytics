@@ -19,7 +19,6 @@ describe('AnalyticsController', () => {
         labels: ['test'],
         data: [1]
       },
-
       {
         name: 'testName2',
         start: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
@@ -89,7 +88,6 @@ describe('AnalyticsController', () => {
       .get(prefix + '/analytic/testName/compare')
       .expect(200)
       .end((err, res) => {
-        console.log('BROKE', res.body)
         assert.ok(res.body.trend)
         assert.equal(res.body.trend[0], 1)
         done(err)
@@ -100,7 +98,6 @@ describe('AnalyticsController', () => {
       .get(prefix + '/analytic/testName2/compare')
       .expect(200)
       .end((err, res) => {
-        console.log('BROKE', res.body)
         assert.ok(res.body.trend)
         assert.equal(res.body.trend[0][0], 1)
         assert.equal(res.body.trend[0][1], 'USD')
