@@ -9,6 +9,8 @@
 
 Analytics for Fabrix Apps.
 
+Take a snap shot of a data set for later analysis.
+
 ## Install
 
 ```sh
@@ -16,7 +18,7 @@ $ npm install --save @fabrix/spool-analytics
 ```
 
 ## Configure
-
+Add the spool
 ```js
 // config/main.js
 import { AnalyticsSpool } from '@fabrix/spool-analytics'
@@ -25,6 +27,76 @@ export const main = {
     // ... other spools
     AnalyticsSpool
   ]
+}
+```
+
+Configure Analytics
+```js
+// config/analytics.ts
+export const analytics = {
+   prefix: '/api/v1',
+   profile: 'testProfile',
+   config: {
+     profiles: {
+       testProfile: [
+         'TestAnalytic.test',
+         'TestAnalytic.minuteTest',
+         'TestAnalytic.hourTest',
+         'TestAnalytic.dayTest',
+         'TestAnalytic.weekTest',
+         'TestAnalytic.monthTest',
+         'TestAnalytic.quarterTest',
+         'TestAnalytic.yearTest'
+       ]
+     },
+     frequency: {
+       minute: [
+         'TestAnalytic.minuteTest'
+       ],
+       hour: [
+         'TestAnalytic.hourTest'
+       ],
+       day: [
+         'TestAnalytic.dayTest'
+       ],
+       week: [
+         'TestAnalytic.weekTest'
+       ],
+       month: [
+         'TestAnalytic.monthTest'
+       ],
+       quarter: [
+         'TestAnalytic.quarterTest'
+       ],
+       year: [
+         'TestAnalytic.yearTest'
+       ]
+     }
+   }
+ }
+               
+```
+
+Configure the engine to run the analytic crons
+```js
+// config/engine.ts
+export const engine = {
+  prefix: '/api/v1',
+  live_mode: false,
+  profile: 'testProfile',
+  crons_config: {
+    profiles: {
+      testProfile: [
+        'AnalyticsCron.minute',
+        'AnalyticsCron.hour',
+        'AnalyticsCron.day',
+        'AnalyticsCron.week',
+        'AnalyticsCron.month',
+        'AnalyticsCron.quarter',
+        'AnalyticsCron.year'
+      ]
+    }
+  }
 }
 ```
 
