@@ -22,7 +22,7 @@ const App = {
         require('@fabrix/spool-router').RouterSpool,
         require('@fabrix/spool-express').ExpressSpool,
         require('@fabrix/spool-sequelize').SequelizeSpool,
-        require('@fabrix/spool-engine').EngineSpool,
+        require('@fabrix/spool-crons').CronsSpool,
         require('../../dist').AnalyticsSpool // spool-proxy-analytics
       ]
     },
@@ -67,22 +67,20 @@ const App = {
         }
       }
     },
-    engine: {
+    crons: {
       prefix: '/api/v1',
       live_mode: false,
       profile: 'testProfile',
-      crons_config: {
-        profiles: {
-          testProfile: [
-            'AnalyticsCron.minute',
-            'AnalyticsCron.hour',
-            'AnalyticsCron.day',
-            'AnalyticsCron.week',
-            'AnalyticsCron.month',
-            'AnalyticsCron.quarter',
-            'AnalyticsCron.year'
-          ]
-        }
+      profiles: {
+        testProfile: [
+          'AnalyticsCron.minute',
+          'AnalyticsCron.hour',
+          'AnalyticsCron.day',
+          'AnalyticsCron.week',
+          'AnalyticsCron.month',
+          'AnalyticsCron.quarter',
+          'AnalyticsCron.year'
+        ]
       }
     },
     web: {

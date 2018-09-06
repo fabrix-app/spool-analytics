@@ -1,4 +1,4 @@
-import { Cron } from '@fabrix/spool-engine'
+import { Cron } from '@fabrix/spool-crons'
 import { FabrixApp } from '@fabrix/fabrix'
 
 export class AnalyticsCron extends Cron {

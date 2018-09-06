@@ -31,7 +31,7 @@ export class AnalyticsSpool extends Spool {
   validate () {
 
     const requiredSpools = [
-      'router', 'express', 'sequelize', 'engine'
+      'router', 'express', 'sequelize', 'crons'
     ]
 
     const spools = Object.keys(this.app.spools)
@@ -51,6 +51,9 @@ export class AnalyticsSpool extends Spool {
     return Promise.all([
       Validator.validateAnalyticsConfig(this.app.config.get('analytics'))
     ])
+      .catch(err => {
+        return Promise.reject(err)
+      })
 
   }
 
@@ -63,6 +66,9 @@ export class AnalyticsSpool extends Spool {
       Utils.copyDefaults(this.app),
       Utils.loadAnalytics(this.app)
     ])
+      .catch(err => {
+        return Promise.reject(err)
+      })
   }
 
   /**
