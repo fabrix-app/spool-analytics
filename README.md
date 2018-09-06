@@ -22,9 +22,12 @@ Add the spool
 ```js
 // config/main.js
 import { AnalyticsSpool } from '@fabrix/spool-analytics'
+import { CronsSpool } from '@fabrix/spool-crons'
+
 export const main = {
   spools: [
     // ... other spools
+    CronsSpool,
     AnalyticsSpool
   ]
 }
@@ -77,25 +80,23 @@ export const analytics = {
                
 ```
 
-Configure the engine to run the analytic crons
+Configure the crons spool to run the analytic crons
 ```js
-// config/engine.ts
-export const engine = {
+// config/crons.ts
+export const crons = {
   prefix: '/api/v1',
   live_mode: false,
   profile: 'testProfile',
-  crons_config: {
-    profiles: {
-      testProfile: [
-        'AnalyticsCron.minute',
-        'AnalyticsCron.hour',
-        'AnalyticsCron.day',
-        'AnalyticsCron.week',
-        'AnalyticsCron.month',
-        'AnalyticsCron.quarter',
-        'AnalyticsCron.year'
-      ]
-    }
+  profiles: {
+    testProfile: [
+      'AnalyticsCron.minute',
+      'AnalyticsCron.hour',
+      'AnalyticsCron.day',
+      'AnalyticsCron.week',
+      'AnalyticsCron.month',
+      'AnalyticsCron.quarter',
+      'AnalyticsCron.year'
+    ]
   }
 }
 ```
