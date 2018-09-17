@@ -1,17 +1,16 @@
 import { FabrixApp } from '@fabrix/fabrix'
+import { FabrixGeneric } from '@fabrix/fabrix/dist/common'
 import { difference } from 'lodash'
 
-export class Analytic {
-  app: FabrixApp
+
+export class Analytic extends FabrixGeneric {
   publish
   build
 
-  constructor (app) {
+  constructor (app: FabrixApp) {
+    super(app)
+
     Object.defineProperties(this, {
-      app: {
-        enumerable: false,
-        value: app
-      },
       /**
        * If the analytic is now immutable
        */
